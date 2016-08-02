@@ -1,4 +1,18 @@
-export function isValidMission(state, mission){
+import update from 'react-addons-update';
+
+export function addPlayer(state, player){
+	return update(state, {
+		players: {$push: [player]}
+	});
+};
+
+export function selectMission(state, newMission){
+	return isValidMission(state, newMission) ? update(state, {
+		mission: {$set: newMission}
+	}) : state;
+}
+
+function isValidMission(state, mission){
 	var missionSize = -2;
 
 	for (var i = 0; i < state.gameBoard.length; i++) {
@@ -7,7 +21,7 @@ export function isValidMission(state, mission){
 			break;
 		} 
 	};
-	
+
 	return ((new Set(mission)).size === mission.length) && 
 		mission.length === missionSize;
 }

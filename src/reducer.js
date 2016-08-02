@@ -1,4 +1,4 @@
-import {isValidMission} from './core';
+import {selectMission, addPlayer} from './core';
 
 export const INITIAL_STATE = {
 	players: []
@@ -7,16 +7,9 @@ export const INITIAL_STATE = {
 export default function reducer(state = INITIAL_STATE, action) {
 	switch(action.type){
 		case 'ADD_PLAYER':
-			return {
-				...state,
-				players: [...state.players, action.player]
-			};
+			return addPlayer(state, action.player);
 		case 'SELECT_MISSION':
-				return isValidMission(state, action.mission) ? {
-						...state,
-						mission: action.mission
-					} : state;
-
+			return selectMission(state, action.mission);
 	}
 	return state;
 }
