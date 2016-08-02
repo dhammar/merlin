@@ -1,0 +1,16 @@
+notes.txt
+
+
+flow
+1. home page
+	a. new game
+	b. join game w/ code
+2. lobby
+	a. start game (anyone for now)
+	b. cancel 
+3. game - roles displayed on each user's device, bad guys, merlin have player lists.
+	starting player randomly chosen. board displayed based on number of players.
+	turn player has choice to select x other players
+4. round actions - 
+	chosen players choose red/black, after resolve, taken back to game screen
+5. assassin reveal & choice / play again?
