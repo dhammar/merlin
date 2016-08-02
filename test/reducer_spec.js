@@ -52,5 +52,30 @@ describe('reducer', () => {
 		expect(nextState).to.deep.equal(nextState);
 	});
 
+	it('handles RECORD_VOTE', () => {
+		const initialState = {
+			active: 'P4',
+			mission: {
+				participants: ['P1', 'P2'],
+				approved: 0,
+				votes: [] // vote: Player: "id", vote: "1" or "0"
+			}
+
+		};
+
+		const action = {type: 'RECORD_VOTE', vote:{voter: 'P4', choice: 1}};
+		const nextState = reducer(initialState, action);
+		expect(nextState).to.deep.equal({
+			active: 'P4',
+			mission: {
+				participants: ['P1', 'P2'],
+				approved: 0,
+				votes: [{voter: 'P4', choice: 1}] // vote: Player: "id", vote: "1" or "0"
+			}
+
+		});
+
+	});
+
 
 });

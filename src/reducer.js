@@ -1,4 +1,4 @@
-import {selectMission, addPlayer} from './core';
+import {recordVote, selectMission, addPlayer} from './core';
 
 export const INITIAL_STATE = {
 	players: []
@@ -10,6 +10,8 @@ export default function reducer(state = INITIAL_STATE, action) {
 			return addPlayer(state, action.player);
 		case 'SELECT_MISSION':
 			return selectMission(state, action.mission);
+		case 'RECORD_VOTE':
+			return recordVote(state, action.vote);
 	}
 	return state;
 }
