@@ -75,7 +75,70 @@ describe('reducer', () => {
 
 		});
 
+	}),
+
+	it('handles RECORD_MISSION_ACTION', () => {
+		const initialState = {
+			active: 'P4',
+			mission: {
+				participants: ['P1', 'P2', 'P3'],
+				score: 0
+			}
+		};
+
+		const action = {type: 'RECORD_MISSION_ACTION', missionAction: 1};
+		const nextState = reducer(initialState, action);
+		expect(nextState).to.deep.equal({
+			active: 'P4',
+			mission: {
+				participants: ['P1', 'P2', 'P3'],
+				score: 1
+			}
+		});
+
+	});
+
+	it('handles RECORD_MISSION_ACTION bad vote', () => {
+		const initialState = {
+			active: 'P4',
+			mission: {
+				participants: ['P1', 'P2', 'P3'],
+				score: 1
+			}
+		};
+
+		const action = {type: 'RECORD_MISSION_ACTION', missionAction: 0};
+		const nextState = reducer(initialState, action);
+		expect(nextState).to.deep.equal({
+			active: 'P4',
+			mission: {
+				participants: ['P1', 'P2', 'P3'],
+				score: 1
+			}
+		});
+
 	});
 
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -24,6 +24,16 @@ export function recordVote(state, payloadVote){
 	};
 };
 
+export function recordMissionAction(state, missionAction){
+	return {
+		...state,
+		mission: {
+			...state.mission,
+			score: state.mission.score + missionAction
+		}
+	};
+};
+
 function isValidMission(state, mission){
 
 	return ((new Set(mission)).size === mission.length) && 
