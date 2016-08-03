@@ -75,9 +75,51 @@ describe('reducer', () => {
 
 		});
 
-	}),
+	});
 
-	it('handles RECORD_MISSION_ACTION', () => {
+	it('handles START_MISSION', () => {
+		const initialState = {
+			active: 'P1',
+			players: ['P1', 'P2', 'P3'],
+			mission: {
+				participants: ['P1', 'P2'],
+				votes: [{voter: 'P1', choice: 1}, 
+					{voter: 'P2', choice: 1}, {voter: 'P3', choice: 1}],
+				approved: 0
+			}
+		};
+
+		const action = {type: 'START_MISSION'};
+		const nextState = reducer(initialState, action);
+		expect(nextState).to.deep.equal({
+			...initialState,
+			mission: {
+				...initialState.mission,
+				approved: 1,
+				score: 0
+			}
+
+		});
+	});
+
+	it('only allows mission to start once all votes are in', () => {
+		const initialState = {
+			active: 'P1',
+			players: ['P1', 'P2', 'P3'],
+			mission: {
+				participants: ['P1', 'P2'],
+				votes: [{voter: 'P1', choice: 1}, 
+					{voter: 'P2', choice: 1}],
+				approved: 0
+			}
+		};
+
+		const action = {type: 'START_MISSION'};
+		const nextState = reducer(initialState, action);
+		expect(nextState).to.deep.equal(nextState);
+	});
+
+	it('handles RECORD_MISSION_ACTION good vote', () => {
 		const initialState = {
 			active: 'P4',
 			mission: {
@@ -118,8 +160,6 @@ describe('reducer', () => {
 		});
 
 	});
-
-
 });
 
 
