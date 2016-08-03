@@ -119,6 +119,46 @@ describe('reducer', () => {
 		expect(nextState).to.deep.equal(nextState);
 	});
 
+	it('handles NEXT_PLAYER', () => {
+		const initialState = {
+			active: 'P2',
+			players: ['P1', 'P2']
+		};
+
+		const action = {type: 'NEXT_PLAYER'};
+		const nextState = reducer(initialState, action);
+
+		expect(nextState).to.equal({
+			...initialState,
+			active: 'P1'
+		});
+	})
+
+	// it('sets the next player as active when a mission vote fails', () => {
+	// 	const initialState = {
+	// 		active: 'P1',
+	// 		players: ['P1', 'P2', 'P3'],
+	// 		mission: {
+	// 			participants: ['P1', 'P2'],
+	// 			votes: [{voter: 'P1', choice: 1}, 
+	// 				{voter: 'P2', choice: 1}, {voter: 'P3', choice: 1}],
+	// 			approved: 0
+	// 		}
+	// 	};
+
+	// 	const action = {type: 'START_MISSION'};
+	// 	const nextState = reducer(initialState, action);
+	// 	expect(nextState).to.deep.equal({
+	// 		...initialState,
+	// 		mission: {
+	// 			...initialState.mission,
+	// 			approved: 1,
+	// 			score: 0
+	// 		}
+
+	// 	});
+	// });
+
 	it('handles RECORD_MISSION_ACTION good vote', () => {
 		const initialState = {
 			active: 'P4',
