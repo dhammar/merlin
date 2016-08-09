@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import reducer from '../src/reducer';
+import {STANDARD_RULE_SET} from '../src/rulesets';
 
 describe('reducer', () => {
 	describe('ADD_PLAYER', () => {
@@ -32,6 +33,21 @@ describe('reducer', () => {
 
 	});
 
+	});
+
+	describe('START_GAME', () => {
+		it('begins the game with the correct rule set', () => {
+			const initialState = {
+				players: ['P1', 'P2', 'P3', 'P4', 'P5', 'P6']
+			};
+			const action = {type: 'START_GAME', rand: 0};
+			const nextState = reducer(initialState, action);
+			expect(nextState).to.deep.equal({
+				...initialState,
+				active: 'P1',
+				...STANDARD_RULE_SET[1]
+			});
+		});
 	});
 
 
@@ -220,6 +236,9 @@ describe('RECORD_MISSION_ACTION', () => {
 
 	});
 });
+
+
+
 });
 
 
