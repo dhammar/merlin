@@ -1,9 +1,9 @@
 import update from 'react-addons-update';
 
-export function addPlayer(state, player){
+export function addPlayer(state, newPlayer){
 	return {
 		...state,
-		players: [...state.players, player]
+		players: [...state.players.filter((p) => (p !== newPlayer)), newPlayer]
 	};	
 }; 
 
@@ -27,7 +27,7 @@ export function recordVote(state, payloadVote){
 		...state,
 		mission: {
 			...state.mission,
-			votes: [...state.mission.votes.filter((v) => v.voter != payloadVote.voter), payloadVote]
+			votes: [...state.mission.votes.filter((v) => v.voter !== payloadVote.voter), payloadVote]
 		}
 	};
 };

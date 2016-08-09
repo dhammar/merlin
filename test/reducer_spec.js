@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import reducer from '../src/reducer';
 
 describe('reducer', () => {
+	describe('ADD_PLAYER', () => {
 	it('handles ADD_PLAYER', () => {
 		const initialState = {
 			players: ["ABCD"]
@@ -15,6 +16,25 @@ describe('reducer', () => {
 			players: ["ABCD", "ABCDEFG"]
 		});
 	});
+
+	it('does not allow duplicate playerCodes', () => {
+		const initialState = {
+			players: ["ABCD"]
+		};
+		const playerCode = 'ABCD';
+		const action = {type: 'ADD_PLAYER', player: playerCode};
+
+		const nextState = reducer(initialState, action);
+		expect(nextState).to.deep.equal({
+			...nextState,
+			players: ["ABCD"]
+		});
+
+	});
+
+	});
+
+
 
 	describe('SELECT_MISSION', () => {
 		it('handles SELECT_MISSION', () => {
@@ -137,33 +157,25 @@ describe('NEXT_PLAYER', () => {
 			active: 'P1'
 		});
 
-	})
-});
+	});
+	it('is cyclic', () => {
+		const initialState = {
+			active: 'P2',
+			players: ['P1', 'P2']
+		};
 
-	// it('sets the next player as active when a mission vote fails', () => {
-	// 	const initialState = {
-	// 		active: 'P1',
-	// 		players: ['P1', 'P2', 'P3'],
-	// 		mission: {
-	// 			participants: ['P1', 'P2'],
-	// 			votes: [{voter: 'P1', choice: 1}, 
-	// 				{voter: 'P2', choice: 1}, {voter: 'P3', choice: 1}],
-	// 			approved: 0
-	// 		}
-	// 	};
+		const action = {type: 'NEXT_PLAYER'};
+		const nextState = reducer(initialState, action);
+		expect(nextState).to.deep.equal({
+			...initialState,
+			active: 'P1'
+		});
 
-	// 	const action = {type: 'START_MISSION'};
-	// 	const nextState = reducer(initialState, action);
-	// 	expect(nextState).to.deep.equal({
-	// 		...initialState,
-	// 		mission: {
-	// 			...initialState.mission,
-	// 			approved: 1,
-	// 			score: 0
-	// 		}
+	});
 
-	// 	});
-	// });
+
+
+	});
 describe('RECORD_MISSION_ACTION', () => {
 	it('handles RECORD_MISSION_ACTION good vote', () => {
 		const initialState = {
