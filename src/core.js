@@ -10,7 +10,7 @@ export function addPlayer(state, player){
 export function nextPlayer(state){
 	return {
 		...state,
-		active: state.players.indexOf(state.active) === state.players.length-1 
+		active: state.players.indexOf(state.active) === (state.players.length-1) 
 		? state.players[0] : state.players[state.players.indexOf(state.active) + 1] 
 	};
 };
