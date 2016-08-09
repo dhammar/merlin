@@ -70,7 +70,7 @@ describe('reducer', () => {
 			};
 			const action = {type: 'SELECT_MISSION', mission: ['P3', 'P1']};
 			const nextState = reducer(initialState, action);
-			expect(nextState).to.deep.equal(nextState);
+			expect(nextState).to.deep.equal(initialState);
 		});
 	});
 
