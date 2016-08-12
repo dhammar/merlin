@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import reducer from '../src/reducer';
 import {STANDARD_RULE_SET} from '../src/rulesets';
+import {fisherYatesShuffle} from '../src/core';
 
 describe('reducer', () => {
 	describe('ADD_PLAYER', () => {
@@ -45,8 +46,20 @@ describe('reducer', () => {
 			expect(nextState).to.deep.equal({
 				...initialState,
 				active: 'P1',
-				...STANDARD_RULE_SET[1]
+				rules: STANDARD_RULE_SET[1]
 			});
+		});
+		it('assigns users to the correct roles based on ruleset', () => {
+			const initialState = {
+				players: ['P1', 'P2', 'P3', 'P4', 'P5', 'P6']
+			};
+			const action = {type: 'START_GAME', rand: 0, shuffle: fisherYatesShuffle(initialState.players)};
+			const nextState = reducer(initialState, action);
+			expect(nextState.players.filter( (p) => p.role === 'merlin').length).to.equal(1);
+			expect(nextState.players.filter( (p) => p.role === 'good').length).to.equal(3);
+			expect(nextState.players.filter( (p) => p.role === 'evil').length).to.equal(1);
+			expect(nextState.players.filter( (p) => p.role === 'assassin').length).to.equal(1);
+				
 		});
 	});
 
@@ -237,6 +250,7 @@ describe('RECORD_MISSION_ACTION', () => {
 	});
 });
 
+	
 
 
 });

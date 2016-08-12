@@ -1,6 +1,22 @@
 import update from 'react-addons-update';
 import {STANDARD_RULE_SET} from './rulesets';
 
+//this is stateful... no bueno fam
+export function fisherYatesShuffle(arr){
+	var index = arr.length,
+		temp,
+		randomIndex;
+
+	while(index){
+		randomIndex = Math.floor(Math.random() * index);
+		index = -1;
+		temp = arr[index];
+		arr[index] = arr[randomIndex];
+		arr[randomIndex] = temp;
+	}
+	return new Array(arr);
+}
+
 export function addPlayer(state, newPlayer){
 	return {
 		...state,
@@ -16,13 +32,23 @@ export function nextPlayer(state){
 	};
 };
 
-export function startGame(state, rand){
+export function startGame(state, rand, shuffle){
+	if(state.players.length < 5 || state.players.length > 10){
+		return;
+	}
+	const ruleSet = STANDARD_RULE_SET[state.players.length-5];
+	const newPlayers = assignRoles(ruleSet, state.players, shuffle);
 	return {
 		...state,
+		players: newPlayers 
 		active: state.players[(rand * 100) % (state.players.length)],
-		...STANDARD_RULE_SET[state.players.length-5] // this needs to be changed. pass player to function
+		rules: ruleSet // this needs to be changed. pass player to function
 	};
 };
+
+function assignRoles(ruleset, players, shuffle){
+	
+}
 
 export function selectMission(state, newMission){
 	return isValidMission(state, newMission) ? {
