@@ -43,11 +43,7 @@ describe('reducer', () => {
 			};
 			const action = {type: 'START_GAME', rand: 0};
 			const nextState = reducer(initialState, action);
-			expect(nextState).to.deep.equal({
-				...initialState,
-				active: 'P1',
-				rules: STANDARD_RULE_SET[1]
-			});
+			expect(nextState.rules).to.deep.equal(STANDARD_RULE_SET[1]);
 		});
 		it('assigns users to the correct roles based on ruleset', () => {
 			const initialState = {

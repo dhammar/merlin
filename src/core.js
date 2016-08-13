@@ -1,7 +1,7 @@
 import update from 'react-addons-update';
 import {STANDARD_RULE_SET} from './rulesets';
 
-//this is stateful... no bueno fam
+//this mutates arr fix this dude
 export function fisherYatesShuffle(arr){
 	var index = arr.length,
 		temp,
@@ -9,12 +9,13 @@ export function fisherYatesShuffle(arr){
 
 	while(index){
 		randomIndex = Math.floor(Math.random() * index);
-		index = -1;
+		index -= 1;
 		temp = arr[index];
 		arr[index] = arr[randomIndex];
 		arr[randomIndex] = temp;
 	}
-	return new Array(arr);
+
+	return arr
 }
 
 export function addPlayer(state, newPlayer){
@@ -40,14 +41,31 @@ export function startGame(state, rand, shuffle){
 	const newPlayers = assignRoles(ruleSet, state.players, shuffle);
 	return {
 		...state,
-		players: newPlayers 
+		players: newPlayers, 
 		active: state.players[(rand * 100) % (state.players.length)],
 		rules: ruleSet // this needs to be changed. pass player to function
 	};
 };
 
 function assignRoles(ruleset, players, shuffle){
-	
+	var completePlayers = [];
+	for(var i = 0; i < players.length; i++){
+		completePlayers[i] = {
+			name: players[i],
+			role: chooseRole(ruleset, i)
+		}
+	}
+	return completePlayers;
+}
+
+function chooseRole(ruleset, i){
+	if(i < ruleset.roles.good - 1){
+		return 'good';
+	} else if(i === ruleset.roles.good - 1){
+		return 'merlin';
+	} else if (i === ruleset.roles.good){
+		return 'assassin';
+	} else return 'evil';
 }
 
 export function selectMission(state, newMission){
