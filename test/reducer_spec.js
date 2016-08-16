@@ -245,10 +245,34 @@ describe('RECORD_MISSION_ACTION', () => {
 
 	});
 });
-
 	
+	describe('RECORD_ASSASSIN_ACTION', () => {
+		it('handles correct choice', () => {
+			const initialState = {
+				players: [{name: 'P1', role: 'good'}, {name: 'P2', role: 'merlin'}, {name: 'P3', role: 'assassin'}]
+			};
+			const action = {type: 'RECORD_ASSASSIN_ACTION', choice: 'P2'};
+			const nextState = reducer(initialState, action);
+			expect(nextState).to.deep.equal({
+				players: ['P1', 'P2', 'P3'],
+				winner: 'evil'
+			});
+		});
+
+		it('handles incorrect choice', () => {
+			const initialState = {
+				players: [{name: 'P1', role: 'good'}, {name: 'P2', role: 'merlin'}, {name: 'P3', role: 'assassin'}]
+			};
+			const action = {type: 'RECORD_ASSASSIN_ACTION', choice: 'P1'};
+			const nextState = reducer(initialState, action);
+			expect(nextState).to.deep.equal({
+				players: ['P1', 'P2', 'P3'],
+				winner: 'good'
+			});
+		});
 
 
+	});
 });
 
 

@@ -115,3 +115,17 @@ function isValidMission(state, mission){
 			}
 		});
 };
+
+export function assassinAction(state, choice){
+	return choice === state.players.find((p) => {
+		if(p.role === 'merlin'){
+			return p;
+		}
+	}).name ? {
+		players: state.players.map((p) => {return p.name}),
+		winner: 'evil'
+	} : {
+		players: state.players.map((p) => {return p.name}),
+		winner: 'good'
+	}; 
+}

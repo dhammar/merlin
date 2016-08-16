@@ -1,4 +1,4 @@
-import {nextPlayer, startGame, startMission, recordMissionAction, recordVote, selectMission, addPlayer} from './core';
+import {assassinAction, nextPlayer, startGame, startMission, recordMissionAction, recordVote, selectMission, addPlayer} from './core';
 
 export const INITIAL_STATE = {
 	players: []
@@ -20,6 +20,8 @@ export default function reducer(state = INITIAL_STATE, action) {
 			return recordMissionAction(state, action.missionAction);
 		case 'NEXT_PLAYER':
 			return nextPlayer(state);
+		case 'RECORD_ASSASSIN_ACTION':
+			return assassinAction(state, action.choice);
 	}
 	return state;
 }
