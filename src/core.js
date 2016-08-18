@@ -20,16 +20,22 @@ export function fisherYatesShuffle(arr){
 
 export function addPlayer(state, newPlayer){
 	return {
-		...state,
-		players: [...state.players.filter((p) => (p !== newPlayer)), newPlayer]
+		type:'ADD_PLAYER',
+		payload: {
+			...state,
+			players: [...state.players.filter((p) => (p !== newPlayer)), newPlayer]
+		}
 	};	
 }; 
 
 export function nextPlayer(state){
 	return {
-		...state,
-		active: state.players.indexOf(state.active) === (state.players.length-1) 
-		? state.players[0] : state.players[state.players.indexOf(state.active) + 1] 
+		type: 'NEXT_PLAYER',
+		payload: {
+			...state,
+			active: state.players.indexOf(state.active) === (state.players.length-1) 
+			? state.players[0] : state.players[state.players.indexOf(state.active) + 1] 
+		}
 	};
 };
 
@@ -40,10 +46,13 @@ export function startGame(state, rand, shuffle){
 	const ruleSet = STANDARD_RULE_SET[state.players.length-5];
 	const newPlayers = assignRoles(ruleSet, state.players, shuffle);
 	return {
+		type: 'START_GAME',
+		payload: {
 		...state,
-		players: newPlayers, 
-		active: state.players[(rand * 100) % (state.players.length)],
-		rules: ruleSet // this needs to be changed. pass player to function
+			players: newPlayers, 
+			active: state.players[(rand * 100) % (state.players.length)],
+			rules: ruleSet // this needs to be changed. pass player to function
+		}
 	};
 };
 
@@ -70,40 +79,56 @@ function chooseRole(ruleset, i){
 
 export function selectMission(state, newMission){
 	return isValidMission(state, newMission) ? {
-		...state,
-		mission: newMission
-	} : state;
+		type: 'SELECT_MISSION',
+		payload: {
+			...state,
+			mission: newMission
+		}
+	} : { type: 'SELECT_MISSION',
+		payload: {
+			state
+		}};
 };
 
 export function recordVote(state, payloadVote){
 	return {
-		...state,
-		mission: {
-			...state.mission,
-			votes: [...state.mission.votes.filter((v) => v.voter !== payloadVote.voter), payloadVote]
+		type: 'RECORD_VOTE',
+		payload: {
+			...state,
+			mission: {
+				...state.mission,
+				votes: [...state.mission.votes.filter((v) => v.voter !== payloadVote.voter), payloadVote]
+			}
 		}
 	};
 };
 
 export function recordMissionAction(state, missionAction){
 	return {
-		...state,
-		mission: {
-			...state.mission,
-			score: state.mission.score + missionAction
+		type: 'RECORD_MISSION_ACTION',
+		payload: {
+			...state,
+			mission: {
+				...state.mission,
+				score: state.mission.score + missionAction
+			}
 		}
 	};
 };
 
 export function startMission(state){
 	return state.players.length === state.mission.votes.length ? {
-		...state,
-		mission: {
-			...state.mission,
-			approved: 1,
-			score: 0
+		type: 'START_MISSION',
+		payload: {
+			...state,
+			mission: {
+				...state.mission,
+				approved: 1,
+				score: 0
+			}
 		}
-	} : state;
+	} : { type: 'START_MISSION',
+		payload: {state}};
 };
 
 function isValidMission(state, mission){
@@ -122,10 +147,16 @@ export function assassinAction(state, choice){
 			return p;
 		}
 	}).name ? {
-		players: state.players.map((p) => {return p.name}),
-		winner: 'evil'
+		type:'RECORD_ASSASSIN_ACTION'
+		payload:{
+			players: state.players.map((p) => {return p.name}),
+			winner: 'evil'
+		}
 	} : {
-		players: state.players.map((p) => {return p.name}),
-		winner: 'good'
+		type:'RECORD_ASSASSIN_ACTION'
+		payload:{
+			players: state.players.map((p) => {return p.name}),
+			winner: 'good'
+		}
 	}; 
 }

@@ -4,24 +4,24 @@ export const INITIAL_STATE = {
 	players: []
 }
 
-export default function reducer(state = INITIAL_STATE, action) {
-	switch(action.type){
+export default function reducer(state = INITIAL_STATE, type, payload)
+	switch(type){
 		case 'ADD_PLAYER':
-			return addPlayer(state, action.player);
+			return addPlayer(state, payload.player);
 		case 'START_GAME':
-			return startGame(state, action.rand);
+			return startGame(state, payload.rand);
 		case 'SELECT_MISSION':
-			return selectMission(state, action.mission);
+			return selectMission(state, payload.mission);
 		case 'RECORD_VOTE':
-			return recordVote(state, action.vote);
+			return recordVote(state, payload.vote);
 		case 'START_MISSION':
 			return startMission(state);
 		case 'RECORD_MISSION_ACTION':
-			return recordMissionAction(state, action.missionAction);
+			return recordMissionAction(state, payload.missionAction);
 		case 'NEXT_PLAYER':
 			return nextPlayer(state);
 		case 'RECORD_ASSASSIN_ACTION':
-			return assassinAction(state, action.choice);
+			return assassinAction(state, payload.choice);
 	}
 	return state;
 }

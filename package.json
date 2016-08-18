@@ -1,7 +1,7 @@
 {
   "name": "merlin",
   "version": "1.0.0",
-  "description": "",
+  "description": "merlin and the bg's",
   "main": "index.js",
   "dependencies": {
     "react": "^15.3.0",
@@ -12,11 +12,11 @@
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
-    "babel-core": "^6.11.4",
-    "babel-preset-es2015": "^6.9.0",
+    "babel-core": "^6.13.2",
+    "babel-preset-es2015": "^6.13.2",
     "babel-preset-stage-2": "^6.11.0",
     "chai": "^3.5.0",
-    "mocha": "^3.0.0"
+    "mocha": "^3.0.2"
   },
   "babel": {
     "presets": [
@@ -33,10 +33,13 @@
     "url": "git+https://github.com/dhammar/merlin.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "dhammar",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/dhammar/merlin/issues"
   },
-  "homepage": "https://github.com/dhammar/merlin#readme"
+  "homepage": "https://github.com/dhammar/merlin#readme",
+  "directories": {
+    "test": "test"
+  }
 }
