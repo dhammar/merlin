@@ -4,7 +4,7 @@ export const INITIAL_STATE = {
 	players: []
 }
 
-export default function reducer(state = INITIAL_STATE, type, payload)
+export default function reducer(state = INITIAL_STATE, {type, payload})
 	switch(type){
 		case 'ADD_PLAYER':
 			return addPlayer(state, payload.player);

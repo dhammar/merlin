@@ -10,7 +10,7 @@ describe('reducer', () => {
 			players: ["ABCD"]
 		};
 		const playerCode = 'ABCDEFG';
-		const action = {type: 'ADD_PLAYER', player: playerCode};
+		const action = {type: 'ADD_PLAYER', payload: {player: playerCode}};
 
 		const nextState = reducer(initialState, action);
 		expect(nextState).to.deep.equal({
@@ -24,7 +24,7 @@ describe('reducer', () => {
 			players: ["ABCD"]
 		};
 		const playerCode = 'ABCD';
-		const action = {type: 'ADD_PLAYER', player: playerCode};
+		const action = {type: 'ADD_PLAYER', payload: {player: playerCode}};
 
 		const nextState = reducer(initialState, action);
 		expect(nextState).to.deep.equal({
@@ -68,7 +68,7 @@ describe('reducer', () => {
 				active: 'P1',
 				gameBoard: [-1, 2, 3]
 			};
-			const action = {type: 'SELECT_MISSION', mission: ['P2', 'P3']};
+			const action = {type: 'SELECT_MISSION', payload: {mission: ['P2', 'P3']}};
 			const nextState = reducer(initialState, action);
 			expect(nextState).to.deep.equal({
 				...nextState,
@@ -82,7 +82,7 @@ describe('reducer', () => {
 				active: 'P1',
 				gameBoard: [0, 2, 3]
 			};
-			const action = {type: 'SELECT_MISSION', mission: ['P3', 'P3']};
+			const action = {type: 'SELECT_MISSION', payload: {mission: ['P3', 'P3']}};
 			const nextState = reducer(initialState, action);
 			expect(nextState).to.deep.equal(nextState);
 		});
@@ -93,7 +93,7 @@ describe('reducer', () => {
 				active: 'P1',
 				gameBoard: [0, -1, 3]
 			};
-			const action = {type: 'SELECT_MISSION', mission: ['P3', 'P1']};
+			const action = {type: 'SELECT_MISSION', payload: {mission: ['P3', 'P1']}};
 			const nextState = reducer(initialState, action);
 			expect(nextState).to.deep.equal(initialState);
 		});
@@ -110,7 +110,7 @@ it('handles RECORD_VOTE', () => {
 
 		};
 
-		const action = {type: 'RECORD_VOTE', vote:{voter: 'P4', choice: 1}};
+		const action = {type: 'RECORD_VOTE', payload: {vote:{voter: 'P4', choice: 1}}};
 		const nextState = reducer(initialState, action);
 		expect(nextState).to.deep.equal({
 			active: 'P4',
@@ -136,7 +136,7 @@ describe('START_MISSION', () => {
 			}
 		};
 
-		const action = {type: 'START_MISSION'};
+		const action = {type: 'START_MISSION', payload: {}};
 		const nextState = reducer(initialState, action);
 		expect(nextState).to.deep.equal({
 			...initialState,
@@ -162,7 +162,7 @@ describe('START_MISSION', () => {
 			}
 		};
 
-		const action = {type: 'START_MISSION'};
+		const action = {type: 'START_MISSION', payload:{}};
 		const nextState = reducer(initialState, action);
 		expect(nextState).to.deep.equal(nextState);
 	});
@@ -175,7 +175,7 @@ describe('NEXT_PLAYER', () => {
 			players: ['P1', 'P2']
 		};
 
-		const action = {type: 'NEXT_PLAYER'};
+		const action = {type: 'NEXT_PLAYER', payload: {}};
 		const nextState = reducer(initialState, action);
 		expect(nextState).to.deep.equal({
 			...initialState,
@@ -189,7 +189,7 @@ describe('NEXT_PLAYER', () => {
 			players: ['P1', 'P2']
 		};
 
-		const action = {type: 'NEXT_PLAYER'};
+		const action = {type: 'NEXT_PLAYER', payload:{}};
 		const nextState = reducer(initialState, action);
 		expect(nextState).to.deep.equal({
 			...initialState,
@@ -211,7 +211,7 @@ describe('RECORD_MISSION_ACTION', () => {
 			}
 		};
 
-		const action = {type: 'RECORD_MISSION_ACTION', missionAction: 1};
+		const action = {type: 'RECORD_MISSION_ACTION', payload:{missionAction: 1}};
 		const nextState = reducer(initialState, action);
 		expect(nextState).to.deep.equal({
 			active: 'P4',
