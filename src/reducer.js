@@ -1,6 +1,6 @@
 import {assassinAction, nextPlayer, startGame, startMission,
 		recordMissionAction, recordVote, selectMission, addPlayer} from './core';
-import * as ACT from './actions';
+import * as ACT from './constants/actions';
 
 
 export default function reducer(state = INITIAL_STATE, action) {
