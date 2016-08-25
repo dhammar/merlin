@@ -1,4 +1,6 @@
-import {assassinAction, nextPlayer, startGame, startMission, recordMissionAction, recordVote, selectMission, addPlayer} from './core';
+import {assassinAction, nextPlayer, startGame, startMission,
+		recordMissionAction, recordVote, selectMission, addPlayer} from './core';
+import * as ACT from './actions';
 
 export const INITIAL_STATE = {
 	players: []
@@ -6,21 +8,21 @@ export const INITIAL_STATE = {
 
 export default function reducer(state = INITIAL_STATE, action) {
 	switch(action.type){
-		case 'ADD_PLAYER':
+		case ACT.ADD_PLAYER:
 			return addPlayer(state, action.player);
-		case 'START_GAME':
+		case ACT.START_GAME:
 			return startGame(state, action.rand);
-		case 'SELECT_MISSION':
+		case ACT.SELECT_MISSION:
 			return selectMission(state, action.mission);
-		case 'RECORD_VOTE':
+		case ACT.RECORD_VOTE:
 			return recordVote(state, action.vote);
-		case 'START_MISSION':
+		case ACT.START_MISSION:
 			return startMission(state);
-		case 'RECORD_MISSION_ACTION':
+		case ACT.RECORD_MISSION_ACTION:
 			return recordMissionAction(state, action.missionAction);
-		case 'NEXT_PLAYER':
+		case ACT.NEXT_PLAYER:
 			return nextPlayer(state);
-		case 'RECORD_ASSASSIN_ACTION':
+		case ACT.RECORD_ASSASSIN_ACTION:
 			return assassinAction(state, action.choice);
 	}
 	return state;
