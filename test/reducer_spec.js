@@ -41,7 +41,7 @@ describe('reducer', () => {
 			const initialState = {
 				players: ['P1', 'P2', 'P3', 'P4', 'P5', 'P6']
 			};
-			const action = {type: 'START_GAME', payload: {rand: 0}};
+			const action = {type: 'START_GAME', payload: {rand: 0, shuffle: fisherYatesShuffle(initialState.players)}};
 			const nextState = reducer(initialState, action);
 			expect(nextState.rules).to.deep.equal(STANDARD_RULE_SET[1]);
 		});
