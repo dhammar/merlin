@@ -7,7 +7,7 @@ export default function reducer(state = INITIAL_STATE, {type, payload}){
 		case ACT.ADD_PLAYER:
 			return addPlayer(state, payload.player);
 		case ACT.START_GAME:
-			return startGame(state, payload.rand);
+			return startGame(state, payload.rand, payload.shuffle);
 		case ACT.SELECT_MISSION:
 			return selectMission(state, payload.mission);
 		case ACT.RECORD_VOTE:
