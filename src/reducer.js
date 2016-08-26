@@ -2,25 +2,24 @@ import {assassinAction, nextPlayer, startGame, startMission,
 		recordMissionAction, recordVote, selectMission, addPlayer} from './core';
 import * as ACT from './constants/actions';
 
-
-export default function reducer(state = INITIAL_STATE, action) {
-	switch(action.type){
+export default function reducer(state = INITIAL_STATE, {type, payload}){
+	switch(type){
 		case ACT.ADD_PLAYER:
-			return addPlayer(state, action.player);
+			return addPlayer(state, payload.player);
 		case ACT.START_GAME:
-			return startGame(state, action.rand);
+			return startGame(state, payload.rand);
 		case ACT.SELECT_MISSION:
-			return selectMission(state, action.mission);
+			return selectMission(state, payload.mission);
 		case ACT.RECORD_VOTE:
-			return recordVote(state, action.vote);
+			return recordVote(state, payload.vote);
 		case ACT.START_MISSION:
 			return startMission(state);
 		case ACT.RECORD_MISSION_ACTION:
-			return recordMissionAction(state, action.missionAction);
+			return recordMissionAction(state, payload.missionAction);
 		case ACT.NEXT_PLAYER:
 			return nextPlayer(state);
 		case ACT.RECORD_ASSASSIN_ACTION:
-			return assassinAction(state, action.choice);
+			return assassinAction(state, payload.choice);
 	}
 	return state;
 }
