@@ -41,7 +41,7 @@ describe('reducer', () => {
 			const initialState = {
 				players: ['P1', 'P2', 'P3', 'P4', 'P5', 'P6']
 			};
-			const action = {type: 'START_GAME', rand: 0};
+			const action = {type: 'START_GAME', payload: {rand: 0}};
 			const nextState = reducer(initialState, action);
 			expect(nextState.rules).to.deep.equal(STANDARD_RULE_SET[1]);
 		});
@@ -49,7 +49,7 @@ describe('reducer', () => {
 			const initialState = {
 				players: ['P1', 'P2', 'P3', 'P4', 'P5', 'P6']
 			};
-			const action = {type: 'START_GAME', rand: 0, shuffle: fisherYatesShuffle(initialState.players)};
+			const action = {type: 'START_GAME', payload: {rand: 0, shuffle: fisherYatesShuffle(initialState.players)}};
 			const nextState = reducer(initialState, action);
 			expect(nextState.players.filter( (p) => p.role === 'merlin').length).to.equal(1);
 			expect(nextState.players.filter( (p) => p.role === 'good').length).to.equal(3);
