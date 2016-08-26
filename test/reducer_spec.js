@@ -233,7 +233,7 @@ describe('RECORD_MISSION_ACTION', () => {
 			}
 		};
 
-		const action = {type: 'RECORD_MISSION_ACTION', missionAction: 0};
+		const action = {type: 'RECORD_MISSION_ACTION', payload: {missionAction: 0}};
 		const nextState = reducer(initialState, action);
 		expect(nextState).to.deep.equal({
 			active: 'P4',
@@ -251,7 +251,7 @@ describe('RECORD_MISSION_ACTION', () => {
 			const initialState = {
 				players: [{name: 'P1', role: 'good'}, {name: 'P2', role: 'merlin'}, {name: 'P3', role: 'assassin'}]
 			};
-			const action = {type: 'RECORD_ASSASSIN_ACTION', choice: 'P2'};
+			const action = {type: 'RECORD_ASSASSIN_ACTION', payload:{choice: 'P2'}};
 			const nextState = reducer(initialState, action);
 			expect(nextState).to.deep.equal({
 				players: ['P1', 'P2', 'P3'],
@@ -263,7 +263,7 @@ describe('RECORD_MISSION_ACTION', () => {
 			const initialState = {
 				players: [{name: 'P1', role: 'good'}, {name: 'P2', role: 'merlin'}, {name: 'P3', role: 'assassin'}]
 			};
-			const action = {type: 'RECORD_ASSASSIN_ACTION', choice: 'P1'};
+			const action = {type: 'RECORD_ASSASSIN_ACTION', payload:{choice: 'P1'}};
 			const nextState = reducer(initialState, action);
 			expect(nextState).to.deep.equal({
 				players: ['P1', 'P2', 'P3'],
