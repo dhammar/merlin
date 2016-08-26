@@ -6,21 +6,21 @@ export const INITIAL_STATE = {
 
 export default function reducer(state = INITIAL_STATE, {type, payload})
 	switch(type){
-		case 'ADD_PLAYER':
+		case ACT.ADD_PLAYER:
 			return addPlayer(state, payload.player);
-		case 'START_GAME':
+		case ACT.START_GAME:
 			return startGame(state, payload.rand);
-		case 'SELECT_MISSION':
+		case ACT.SELECT_MISSION:
 			return selectMission(state, payload.mission);
-		case 'RECORD_VOTE':
+		case ACT.RECORD_VOTE:
 			return recordVote(state, payload.vote);
-		case 'START_MISSION':
+		case ACT.START_MISSION:
 			return startMission(state);
-		case 'RECORD_MISSION_ACTION':
+		case ACT.RECORD_MISSION_ACTION:
 			return recordMissionAction(state, payload.missionAction);
-		case 'NEXT_PLAYER':
+		case ACT.NEXT_PLAYER:
 			return nextPlayer(state);
-		case 'RECORD_ASSASSIN_ACTION':
+		case ACT.RECORD_ASSASSIN_ACTION:
 			return assassinAction(state, payload.choice);
 	}
 	return state;
