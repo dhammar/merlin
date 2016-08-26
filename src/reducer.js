@@ -2,7 +2,7 @@ import {assassinAction, nextPlayer, startGame, startMission,
 		recordMissionAction, recordVote, selectMission, addPlayer} from './core';
 import * as ACT from './constants/actions';
 
-export default function reducer(state = INITIAL_STATE, {type, payload})
+export default function reducer(state = INITIAL_STATE, {type, payload}){
 	switch(type){
 		case ACT.ADD_PLAYER:
 			return addPlayer(state, payload.player);
