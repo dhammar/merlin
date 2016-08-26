@@ -1,8 +1,6 @@
-import {assassinAction, nextPlayer, startGame, startMission, recordMissionAction, recordVote, selectMission, addPlayer} from './core';
-
-export const INITIAL_STATE = {
-	players: []
-}
+import {assassinAction, nextPlayer, startGame, startMission,
+		recordMissionAction, recordVote, selectMission, addPlayer} from './core';
+import * as ACT from './constants/actions';
 
 export default function reducer(state = INITIAL_STATE, {type, payload})
 	switch(type){
@@ -24,4 +22,17 @@ export default function reducer(state = INITIAL_STATE, {type, payload})
 			return assassinAction(state, payload.choice);
 	}
 	return state;
+}
+
+export const INITIAL_STATE = {
+	players: [], //{name: 'P1', role: 'good'} or just {name: 'P1'}
+	active: '',
+	gameBoard: [],
+	mission: {
+		participants: [],
+		approved: 0,
+		votes: [], // {voter: 'P1', choice: 1}
+		score: 0
+	},
+	winner: ''
 }

@@ -1,5 +1,5 @@
 import update from 'react-addons-update';
-import {STANDARD_RULE_SET} from './rulesets';
+import {STANDARD_RULE_SET} from './constants/rulesets';
 
 //this mutates arr fix this dude
 export function fisherYatesShuffle(arr){

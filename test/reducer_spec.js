@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import reducer from '../src/reducer';
-import {STANDARD_RULE_SET} from '../src/rulesets';
+import {STANDARD_RULE_SET} from '../src/constants/rulesets';
 import {fisherYatesShuffle} from '../src/core';
 
 describe('reducer', () => {
