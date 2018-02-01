@@ -1,6 +1,6 @@
 installation:
 
-npm install --save-dev babel-core babel-cli babel-preset-es2015 mocha chai
+npm install
 
 verify/run tests with: 
 npm run test
