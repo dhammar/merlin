@@ -1,7 +1,6 @@
-import update from 'react-addons-update';
 import {STANDARD_RULE_SET} from './constants/rulesets';
+import {GOOD, ASSASSIN, EVIL, MERLIN} from "./constants/roles";
 
-//this mutates arr fix this dude
 export function fisherYatesShuffle(arr){
 	var index = arr.length,
 		temp,
@@ -60,12 +59,12 @@ function assignRoles(ruleset, players, shuffle){
 
 function chooseRole(ruleset, i){
 	if(i < ruleset.roles.good - 1){
-		return 'good';
+		return GOOD;
 	} else if(i === ruleset.roles.good - 1){
-		return 'merlin';
+		return MERLIN;
 	} else if (i === ruleset.roles.good){
-		return 'assassin';
-	} else return 'evil';
+		return ASSASSIN;
+	} else return EVIL;
 }
 
 export function selectMission(state, newMission){
